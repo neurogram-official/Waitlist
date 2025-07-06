@@ -1,35 +1,585 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Page</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    h1 {
-      color: #007bff;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroGram - Showcase Your AI Creations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8A2BE2, #FF00FF, #FF1493);
+            --primary-gradient-reverse: linear-gradient(135deg, #FF1493, #FF00FF, #8A2BE2);
+            --card-gradient: linear-gradient(135deg, #1a0633, #2a0a5e);
+            --dark-bg: #0f051d;
+            --light-text: #f0f0f0;
+            --accent: #a74cf1;
+            --glow: 0 0 15px rgba(183, 82, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 20, 147, 0.1) 0%, transparent 20%);
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 5, 29, 0.85);
+            border-bottom: 1px solid rgba(167, 76, 241, 0.3);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 5%;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .subheading {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #d0bcff;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary-gradient);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+            margin-bottom: 60px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6);
+        }
+
+        /* Platform Explanation */
+        .platform-explanation {
+            padding: 80px 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(20, 8, 38, 0.6);
+            border-radius: 20px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .explanation-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .explanation-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .explanation-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .explanation-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(40, 15, 75, 0.4);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 76, 241, 0.2);
+        }
+
+        .explanation-item:hover {
+            transform: translateY(-5px);
+            background: rgba(55, 20, 100, 0.5);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .explanation-item i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .explanation-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #d8b4fe;
+        }
+
+        .explanation-item p {
+            color: #b9a7d6;
+        }
+
+        /* Waitlist Form */
+        .waitlist-section {
+            padding: 80px 5%;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .waitlist-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .waitlist-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #d0bcff;
+            text-align: left;
+        }
+
+        .waitlist-form input,
+        .waitlist-form textarea {
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid rgba(167, 76, 241, 0.5);
+            background: rgba(30, 10, 50, 0.7);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .waitlist-form input:focus,
+        .waitlist-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+        }
+
+        .waitlist-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .waitlist-form button {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            background: var(--primary-gradient);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+            margin-top: 10px;
+        }
+
+        .waitlist-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            color: #4ade80;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 3, 20, 0.95);
+            padding: 50px 5% 30px;
+            border-top: 1px solid rgba(167, 76, 241, 0.3);
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--card-gradient);
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(167, 76, 241, 0.3);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--primary-gradient);
+            box-shadow: var(--glow);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            color: #9e8fb9;
+            font-size: 0.9rem;
+        }
+
+        .social-handle {
+            font-size: 1.2rem;
+            color: #d0bcff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            .explanation-title,
+            .waitlist-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subheading {
+                font-size: 1.2rem;
+            }
+            
+            .cta-button {
+                font-size: 1rem;
+                padding: 12px 30px;
+            }
+            
+            .explanation-title,
+            .waitlist-title {
+                font-size: 2rem;
+            }
+            
+            .waitlist-form {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subheading {
+                font-size: 1.1rem;
+            }
+            
+            .explanation-title,
+            .waitlist-title {
+                font-size: 1.8rem;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <div class="logo">NEUROGRAM</div>
+    </header>
 
-  <h1>Hello, World!</h1>
-  <p>This is a simple HTML boilerplate for testing.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SHOWCASE YOUR AI CREATIONS</h1>
+            <p class="subheading">NeuroGram is the premier platform to share, discover, and explore AI-generated projects across all creative domains.</p>
+            <button class="cta-button" id="joinWaitlist">Join the Waitlist</button>
+        </div>
+    </section>
 
-  <button onclick="alert('Button clicked!')">Click Me</button>
+    <!-- Platform Explanation -->
+    <section class="platform-explanation fade-in">
+        <h2 class="explanation-title">WHAT IS NEUROGRAM?</h2>
+        <div class="explanation-content">
+            <div class="explanation-item">
+                <i class="fas fa-globe"></i>
+                <h3>Showcase Platform</h3>
+                <p>A dedicated space to display your AI-generated art, tools, stories, and other creative projects.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <i class="fas fa-users"></i>
+                <h3>Community Hub</h3>
+                <p>Connect with other AI creators, get feedback, and find collaborators for your next project.</p>
+            </div>
+            
+            <div class="explanation-item">
+                <i class="fas fa-search"></i>
+                <h3>Discovery Engine</h3>
+                <p>Explore innovative AI projects across various domains and find inspiration for your own creations.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Waitlist Form -->
+    <section class="waitlist-section fade-in" id="waitlist">
+        <h2 class="waitlist-title">JOIN THE WAITLIST</h2>
+        <form class="waitlist-form" action="https://formspree.io/f/movwzpyz" method="POST">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="interest">What AI projects interest you most?</label>
+                <textarea id="interest" name="interest" placeholder="Art, stories, tools, visualizations, etc."></textarea>
+            </div>
+            
+            <button type="submit">Join Waitlist</button>
+        </form>
+        <div class="success-message" id="successMessage">
+            Thank you for joining the waitlist! We'll be in touch soon.
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-handle">@neurogram_official</div>
+        <div class="social-links">
+            <a href="https://twitter.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://discord.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="https://linkedin.com" class="social-link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <p class="copyright">© 2025 NeuroGram. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Join Waitlist button scroll to form
+        document.getElementById('joinWaitlist').addEventListener('click', function() {
+            const waitlistSection = document.getElementById('waitlist');
+            if (waitlistSection) {
+                waitlistSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Form submission handling (simplified)
+        const form = document.querySelector('.waitlist-form');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function(e) {
+            // Let the form submit naturally to Formspree
+            // Show success message after a brief delay
+            setTimeout(() => {
+                successMessage.style.display = 'block';
+                form.reset();
+            }, 1000);
+        });
+
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    </script>
 </body>
-</html>
+  </html>
