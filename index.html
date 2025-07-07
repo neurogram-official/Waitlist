@@ -450,6 +450,18 @@
   height: 40px;
   width: auto;
 }
+        .tagline-text {
+  margin-top: 10px;
+  color: #cdbfff;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+  .tagline-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
 
 </style>
 </head>
@@ -469,9 +481,14 @@
         <div class="hero-content">
             <h1>SHOWCASE YOUR AI CREATIONS</h1>
             <p class="subheading">NeuroGram is the premier platform to share, discover, and explore AI-generated projects across all creative domains.</p>
-    <p style="margin-top: 10px; color: #cdbfff;">We’re currently curating early AI creators — join now to be featured in our launch wave.</p>
-            <button class="cta-button" id="joinWaitlist">Join the Waitlist</button>
-        </div>
+    <div class="tagline-wrap">
+  <p class="tagline-text">
+    We’re currently curating early AI creators — join now to be featured in our launch wave.
+  </p>
+  <div style="height: 25px;"></div> <!-- Spacer -->
+  <button class="cta-button" id="joinWaitlist">Join the Waitlist</button>
+    </div>
+            </div>
     </section>
 
     <!-- Platform Explanation -->
